@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: premium-service-job-
+spec:
+  template:
+    spec:
+      containers:
+      - name: premium-service-container
+        image: docker.io/rafaelcurran/image-classifier:tag
+        imagePullPolicy: Always
+        env:
+        - name: DATASET
+          value: "kmnist"
+        - name: TYPE
+          value: "cnn"
+        resources:
+          limits:
+            cpu: "0.9"
+      restartPolicy: Never
+

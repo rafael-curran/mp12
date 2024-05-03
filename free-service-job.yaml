@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: free-service-job-
+spec:
+  template:
+    spec:
+      containers:
+      - name: free-service-container
+        image: rafaelcurran/image-classifier:tag
+        imagePullPolicy: Always
+        env:
+        - name: DATASET
+          value: "mnist"
+        - name: TYPE
+          value: "ff"
+        resources:
+          limits:
+            cpu: "0.9"
+      restartPolicy: Never
+
